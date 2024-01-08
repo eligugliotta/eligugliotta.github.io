@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,28 +6,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
-    <!-- Aggiungi eventuali stili CSS o collegamenti aggiuntivi necessari -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/demo.css">
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: "Serif", serif;
+            text-align: center;
+        }
+
+        .image-container {
+            margin: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: auto;
+        }
+
+        .image-container .small-image {
+            width: 50%;
+            height: auto;
+            margin-top: 70px;
+        }
+
+        .image-container p {
+            margin-top: 10px;
+        }
+
+        .blue-pill-button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .next-button {
+            background-color: fuchsia;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 
 <body>
-    <!-- Header o titolo della pagina -->
+    
     <h1>Gallery</h1>
 
-    <!-- Galleria di immagini con descrizioni -->
-    <div class="hobbies-gallery">
-        <!-- Immagine 1 -->
-        ![Immagine 1](link_immagine_1)
-        <p>Descrizione breve dell'immagine 1: [Inserisci una breve descrizione dell'immagine e il contesto.]</p>
-
-        <!-- Immagine 2 -->
-        ![Immagine 2](link_immagine_2)
-        <p>Descrizione breve dell'immagine 2: [Inserisci una breve descrizione dell'immagine e il contesto.]</p>
-
-        <!-- ... Aggiungi altre immagini secondo la tua struttura -->
+    <div id="currentImageContainer" class="image-container">
+        <img id="currentImage" src="image_link_1.jpg" alt="">
+        <p id="currentImageTitle"><i>Sunflowers</i></p>
+        <p id="currentImageDescription">Here begins my journey, in a village in Umbria (Italy), populated by sunflowers. I was baptized by the sun and the love for nature, that's why I never miss a chance to indulge in long walks in natural settings.</p>
     </div>
 
-    <!-- Aggiungi eventuali altri contenuti o stili CSS necessari -->
+    <button class="blue-pill-button" onclick="previousImage()">Tried-and-True</button>
 
+    <button class="next-button" onclick="nextImage()">Next</button>
+
+    <!--- <a href="resume.pdf" target="_blank" class="blue-pill-button">Tried-and-True</a> -->
+
+    <script>
+
+        
+
+        var imageUrls = [
+            "image_link_1.jpg",
+            "image_link_2.jpg",
+            "image_link_3.jpg",
+            "image_link_4.jpg",
+            "image_link_5.jpg",
+            "image_link_6.jpg",
+            "image_link_7.jpg",    
+        ];
+
+        
+        var imageTitle = [
+            "Sunflowers",
+            "The Talking Statue of the Porter (Facchino) in Rome",
+            "Tunis",
+            "Grenoble",
+            "Sports I love",
+            "Paw buddies",
+            "A detail of a building in Borgo Stretto - Pisa",
+        ];
+
+        
+        var imageDescriptions = [
+            "Here begins my journey, in a village in Umbria (Italy), populated by sunflowers. I was baptized by the sun and the love for nature. I never miss a chance to indulge in long walks in natural settings",
+            "Rome welcomed me for my university studies, but it gave me much more. Its resilient beauty amidst decay is a stage of human stories from which one can gaze upon the world. Here, I discovered a passion for travel and the exploration of new cultures and dimensions.",
+            "Tunis immediately became a second home for me; it made me feel at home. It's the place that opened doors for me to explore the interconnections between Mediterranean cultures, both linguistically and culturally. <img src='Tunis_bab.jpg' alt='Bab el-Khadra fruit-seller' class='small-image'> The fruit seller of Bab el-Khadra, who saved my dinner several times.",
+            "Beyond the Alps, I found the perfect environment to combine these passions within my research field. I also discovered the pleasure of a kind and lively academic atmosphere, despite the years of COVID! And what can I say, the nature of the Alps is breathtaking—lakes, rivers, and mountains to explore, what a wonder!",
+            "Needless to say, I took advantage of these marvelous mountains around Grenoble for skiing and admiring the snowy landscapes from the peaks of the ski slopes (of which I provide only a small example here). I also enjoy going for bike rides or using it as a means of transportation in the city. The same goes for rollerblading if the city permits it! I have practiced various team and individual sports. Lately, I have become interested in martial arts :)",
+            "About two years ago, my heart was stolen by little Magò (Margot for French friends), a foundling kitty. <img src='piano.jpg' class='small-image'> Magò likes to hear me play the piano.",
+            "Recently I landed in Pisa, where I found a new dimension, made up of new colleagues/friends and new activities. <img src='maneggio.jpg' class='small-image'> Among the new activities :)",
+        ]; 
+
+        var currentIndex;
+
+        function nextImage() {
+            currentIndex++;
+
+            if (currentIndex < 0) {
+            currentIndex = imageUrls.length - 1;
+            }
+            
+            if (currentIndex >= imageUrls.length) {
+            window.location.href = 'index.html';  
+            return;
+            }
+
+
+            var currentImageElement = document.getElementById("currentImage");
+            var currentTitleElement = document.getElementById("currentImageTitle");
+            var currentDescriptionElement = document.getElementById("currentImageDescription");
+                        
+            
+            
+            currentImageElement.src = imageUrls[currentIndex];
+            currentTitleElement.innerHTML = `<i>${imageTitle[currentIndex]}</i>`;
+            currentDescriptionElement.innerHTML = imageDescriptions[currentIndex];
+        
+        }
+        
+        function previousImage() {
+        currentIndex--;
+
+            if (currentIndex < 0) {
+            window.location.href = 'index.html';  
+            return;
+            }
+
+        
+            var currentImageElement = document.getElementById("currentImage");
+            var currentTitleElement = document.getElementById("currentImageTitle");
+            var currentDescriptionElement = document.getElementById("currentImageDescription");
+
+            currentImageElement.src = imageUrls[currentIndex];
+            currentTitleElement.textContent = imageTitle[currentIndex];
+            currentDescriptionElement.textContent = imageDescriptions[currentIndex];
+        }
+
+        currentIndex = 0;
+
+    </script>
 </body>
 
 </html>
